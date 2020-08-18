@@ -17,17 +17,24 @@ class ZiftTabMenuView: UIView {
     var variableConstraintGroup: [NSLayoutConstraint] = []
     var constantConstraintGroup: [NSLayoutConstraint] = []
     
-    @IBOutlet weak var containerView: UIView!
+    lazy var containerView = UIView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         containerView.roundCorners([.topLeft, .topRight], radius: 12)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    init() {
+        super.init(frame: CGRect.zero)
+        configureContainerView()
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+       
+       
     
     func addTabMenuItem(title: String,
                         icon: UIImage?,
@@ -85,6 +92,8 @@ class ZiftTabMenuView: UIView {
     
     func configureConstraints() {
         
+        
+        
         NSLayoutConstraint.deactivate(constantConstraintGroup)
         NSLayoutConstraint.deactivate(variableConstraintGroup)
         
@@ -123,5 +132,14 @@ class ZiftTabMenuView: UIView {
             
             NSLayoutConstraint.activate(variableConstraintGroup)
         }
+    }
+    
+    func configureContainerView() {
+        self.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: notSelectedTabTopOffset).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         tabMenuView.selectTabMenuItem(index: 0)
     }
     
-    var tabMenuView = ZiftTabMenuView.fromNib()
+    var tabMenuView = ZiftTabMenuView()
     
     func configureTabMenuConstraints() {
         view.addSubview(tabMenuView)
