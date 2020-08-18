@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         configureTabMenuConstraints()
         configureTabMenuItems()
+        tabMenuView.configure(backgroundColor: .white)
+         tabMenuView.selectTabMenuItem(index: 0)
     }
     
     var tabMenuView = ZiftTabMenuView.fromNib()
@@ -48,8 +50,6 @@ class ViewController: UIViewController {
         tabMenuView.addTabMenuItem(title: "Location", icon: UIImage(named: "SearchesTabIcon"), id: "Location") { [weak self] in
             self?.tabMenuSelectedHandler()
         }
-        
-        tabMenuView.selectTabMenuItem(index: 0)
     }
     
     func tabMenuSelectedHandler() {

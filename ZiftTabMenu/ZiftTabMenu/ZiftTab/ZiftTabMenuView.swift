@@ -27,7 +27,6 @@ class ZiftTabMenuView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.translatesAutoresizingMaskIntoConstraints = false
-        configureBackground()
     }
     
     func addTabMenuItem(title: String, icon: UIImage?, id: String, tapHandler: @escaping ()->Void) {
@@ -54,8 +53,10 @@ class ZiftTabMenuView: UIView {
         tabMenuItemsArray[index].tabMenuItemTapHandler(index)
     }
     
-    func configureBackground(color: UIColor = .white) {
-        containerView.backgroundColor = color
+    func configure(backgroundColor: UIColor = .white, selectedTabWidthCoef: CGFloat = 1.83, notSelectedTabTopOffset: CGFloat = 7) {
+        containerView.backgroundColor = backgroundColor
+        self.selectedTabWidthCoef = selectedTabWidthCoef
+        self.notSelectedTabTopOffset = notSelectedTabTopOffset
     }
     
     func recalcTabMenuConstraints(selectedIndex: Int){
