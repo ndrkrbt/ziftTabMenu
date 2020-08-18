@@ -21,6 +21,7 @@ class ZiftTabMenuItemView: UIView {
     var id: String = ""
     var tabMenuItemTapHandler: ((Int) -> Void)!
     var tabMenuIndex: Int = 0
+    var selectedTabTitleColor: UIColor = .ziftSelectedTabTitle
     
     var isSelected = false {
         didSet {
@@ -30,7 +31,7 @@ class ZiftTabMenuItemView: UIView {
                 layer.shadowRadius = 6.0
                 layer.shadowOpacity = 0.18
                 layer.shadowOffset = CGSize(width: 0, height: 3)
-                iconImageView.tintColor = .ziftSelectedTabTitle
+                iconImageView.tintColor = selectedTabTitleColor
                 iconImageView.alpha = 1
             } else {
                 iconImageView.tintColor = .black
@@ -39,6 +40,7 @@ class ZiftTabMenuItemView: UIView {
                 backgroundViewContainer.backgroundColor = .clear
             }
             configureIconImageViewConstraints(isSelected)
+            titleLabel.textColor = selectedTabTitleColor
             titleLabelContainer.isHidden = !isSelected
         }
     }
@@ -77,13 +79,18 @@ class ZiftTabMenuItemView: UIView {
         ]
     }
     
-    func configureView(title: String, icon: UIImage?, id: String, tabMenuIndex: Int) {
+    func configureView(title: String,
+                       icon: UIImage?,
+                       id: String,
+                       tabMenuIndex: Int,
+                       selectedTabTitleColor: UIColor) {
         titleLabel.text = title
         if let icon = icon {
             iconImageView.image = icon.withRenderingMode(.alwaysTemplate)
         }
         self.id = id
         self.tabMenuIndex = tabMenuIndex
+        self.selectedTabTitleColor = selectedTabTitleColor
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
