@@ -36,13 +36,8 @@ class ZiftTabMenuView: UIView {
        
        
     
-    func addTabMenuItem(title: String,
-                        icon: UIImage?,
-                        id: String,
-                        selectedTabTitleColor: UIColor = .ziftSelectedTabTitle,
+    func addTabMenuItem(tabMenuItem: ZiftTabMenuItemView,
                         tapHandler: @escaping ()->Void) {
-        let tabMenuItem = ZiftTabMenuItemView.fromNib()
-        tabMenuItem.configureView(title: title, icon: icon, id: id, tabMenuIndex: tabMenuItemsArray.count, selectedTabTitleColor: selectedTabTitleColor)
         addSubview(tabMenuItem)
         tabMenuItem.tabMenuItemTapHandler = { [weak self] index in
             guard let self = self else {
@@ -54,6 +49,7 @@ class ZiftTabMenuView: UIView {
             }
             tapHandler()
         }
+        tabMenuItem.tabMenuIndex = tabMenuItemsArray.count
         tabMenuItemsArray.append(tabMenuItem)
         configureConstraints()
         self.setNeedsLayout()
@@ -61,7 +57,7 @@ class ZiftTabMenuView: UIView {
     }
     
     func selectTabMenuItem(index: Int) {
-        tabMenuItemsArray[index].tabMenuItemTapHandler(index)
+        tabMenuItemsArray[index].tabMenuItemTapHandler?(index)
     }
     
     func configure(backgroundColor: UIColor = .white, selectedTabWidthCoef: CGFloat = 1.83, notSelectedTabTopOffset: CGFloat = 7) {
