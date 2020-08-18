@@ -1,5 +1,5 @@
 //
-//  ChildScreenSegmentItemView.swift
+//  ZiftTabMenuItemView.swift
 //  zift-parent
 //
 //  Created by Andrey on 13/12/2018.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-class ChildScreenSegmentItemView: UIView {
+class ZiftTabMenuItemView: UIView {
 
     @IBOutlet weak var backgroundViewContainer: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleLabelContainer: UIView!
     
-    var selectedConstraintGroup: [NSLayoutConstraint] = []
-    var unSelectedConstraintGroup: [NSLayoutConstraint] = []
+    var selectedTabConstraintGroup: [NSLayoutConstraint] = []
+    var unselectedTabConstraintGroup: [NSLayoutConstraint] = []
     
     var id: String = ""
-    var segmentTapHandler: ((Int) -> Void)!
-    var segmentIndex: Int = 0
+    var tabMenuItemTapHandler: ((Int) -> Void)!
+    var tabMenuIndex: Int = 0
     
     var isSelected = false {
         didSet {
@@ -56,37 +56,37 @@ class ChildScreenSegmentItemView: UIView {
     
     func configureIconImageViewConstraints(_ isSelected: Bool) {
         if isSelected {
-            NSLayoutConstraint.deactivate(unSelectedConstraintGroup)
-            NSLayoutConstraint.activate(selectedConstraintGroup)
+            NSLayoutConstraint.deactivate(unselectedTabConstraintGroup)
+            NSLayoutConstraint.activate(selectedTabConstraintGroup)
         }
         else {
-            NSLayoutConstraint.deactivate(selectedConstraintGroup)
-            NSLayoutConstraint.activate(unSelectedConstraintGroup)
+            NSLayoutConstraint.deactivate(selectedTabConstraintGroup)
+            NSLayoutConstraint.activate(unselectedTabConstraintGroup)
         }
     }
     
     func configureConstraintGroups(){
-        selectedConstraintGroup = [
+        selectedTabConstraintGroup = [
             iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: 15),
             iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: -5)
         ]
         
-        unSelectedConstraintGroup = [
+        unselectedTabConstraintGroup = [
             iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor),
             iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor)
         ]
     }
     
-    func configureView(title: String, icon: UIImage?) {
+    func configureView(title: String, icon: UIImage?, id: String, tabMenuIndex: Int) {
         titleLabel.text = title
-        guard let icon = icon else {
-            return
+        if let icon = icon {
+            iconImageView.image = icon.withRenderingMode(.alwaysTemplate)
         }
-        iconImageView.image = icon.withRenderingMode(.alwaysTemplate)
+        self.id = id
+        self.tabMenuIndex = tabMenuIndex
     }
     
-    
     @IBAction func buttonTapped(_ sender: Any) {
-        segmentTapHandler(segmentIndex)
+        tabMenuItemTapHandler(tabMenuIndex)
     }
 }

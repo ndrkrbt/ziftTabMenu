@@ -12,52 +12,52 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSegmentViewConstraints()
-        configureSegmentItems()
+        configureTabMenuConstraints()
+        configureTabMenuItems()
     }
     
-    var segmentView = ChildScreenSegmentView.fromNib()
+    var tabMenuView = ZiftTabMenuView.fromNib()
     
-    func configureSegmentViewConstraints() {
-        view.addSubview(segmentView)
+    func configureTabMenuConstraints() {
+        view.addSubview(tabMenuView)
         
-        segmentView.translatesAutoresizingMaskIntoConstraints = false
-        segmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        segmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        segmentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        segmentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        tabMenuView.translatesAutoresizingMaskIntoConstraints = false
+        tabMenuView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tabMenuView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tabMenuView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        tabMenuView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
     
-    func configureSegmentItems() {
-        segmentView.addSegmentItem(title: "Searches", icon: UIImage(named: "SearchesTabIcon"), id: "Searches") { [weak self] in
-            self?.segmentSelectedHandler()
+    func configureTabMenuItems() {
+        tabMenuView.addTabMenuItem(title: "Searches", icon: UIImage(named: "SearchesTabIcon"), id: "Searches") { [weak self] in
+            self?.tabMenuSelectedHandler()
         }
 
-        segmentView.addSegmentItem(title: "Screentime", icon: UIImage(named: "SearchesTabIcon"), id: "Screentime") { [weak self] in
-            self?.segmentSelectedHandler()
+        tabMenuView.addTabMenuItem(title: "Screentime", icon: UIImage(named: "SearchesTabIcon"), id: "Screentime") { [weak self] in
+            self?.tabMenuSelectedHandler()
         }
 
-        segmentView.addSegmentItem(title: "Blocks & Alerts", icon: UIImage(named: "SearchesTabIcon"), id: "Blocks") { [weak self] in
-            self?.segmentSelectedHandler()
+        tabMenuView.addTabMenuItem(title: "Blocks & Alerts", icon: UIImage(named: "SearchesTabIcon"), id: "Blocks") { [weak self] in
+            self?.tabMenuSelectedHandler()
         }
 
-        segmentView.addSegmentItem(title: "YouTube", icon: UIImage(named: "SearchesTabIcon"), id: "YouTube") { [weak self] in
-            self?.segmentSelectedHandler()
+        tabMenuView.addTabMenuItem(title: "YouTube", icon: UIImage(named: "SearchesTabIcon"), id: "YouTube") { [weak self] in
+            self?.tabMenuSelectedHandler()
         }
 
-        segmentView.addSegmentItem(title: "Location", icon: UIImage(named: "SearchesTabIcon"), id: "Location") { [weak self] in
-            self?.segmentSelectedHandler()
+        tabMenuView.addTabMenuItem(title: "Location", icon: UIImage(named: "SearchesTabIcon"), id: "Location") { [weak self] in
+            self?.tabMenuSelectedHandler()
         }
         
-        segmentView.selectSegmentByIndex(0)
+        tabMenuView.selectTabMenuItem(index: 0)
     }
     
-    func segmentSelectedHandler() {
-        guard let selectedItemSegment = segmentView.segmentItemArray.filter({$0.isSelected}).first else {
+    func tabMenuSelectedHandler() {
+        guard let selectedMenuItem = tabMenuView.tabMenuItemsArray.filter({$0.isSelected}).first else {
             return
         }
         
-        print(selectedItemSegment.id)
+        print(selectedMenuItem.id)
     }
 }
 

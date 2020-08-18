@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E21CCCB24E5CEE8001BA065 /* ChildScreenSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E21CCC724E5CEE8001BA065 /* ChildScreenSegmentView.xib */; };
-		4E21CCCC24E5CEE8001BA065 /* ChildScreenSegmentItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E21CCC824E5CEE8001BA065 /* ChildScreenSegmentItemView.xib */; };
-		4E21CCCD24E5CEE8001BA065 /* ChildScreenSegmentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCC924E5CEE8001BA065 /* ChildScreenSegmentItemView.swift */; };
-		4E21CCCE24E5CEE8001BA065 /* ChildScreenSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCCA24E5CEE8001BA065 /* ChildScreenSegmentView.swift */; };
+		4E21CCCB24E5CEE8001BA065 /* ZiftTabMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E21CCC724E5CEE8001BA065 /* ZiftTabMenuView.xib */; };
+		4E21CCCC24E5CEE8001BA065 /* ZiftTabMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E21CCC824E5CEE8001BA065 /* ZiftTabMenuItemView.xib */; };
+		4E21CCCD24E5CEE8001BA065 /* ZiftTabMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */; };
+		4E21CCCE24E5CEE8001BA065 /* ZiftTabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */; };
 		4E283A7024E5AFFC00C45270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A6F24E5AFFC00C45270 /* AppDelegate.swift */; };
 		4E283A7224E5AFFC00C45270 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A7124E5AFFC00C45270 /* SceneDelegate.swift */; };
 		4E283A7424E5AFFC00C45270 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A7324E5AFFC00C45270 /* ViewController.swift */; };
@@ -24,10 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E21CCC724E5CEE8001BA065 /* ChildScreenSegmentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildScreenSegmentView.xib; sourceTree = "<group>"; };
-		4E21CCC824E5CEE8001BA065 /* ChildScreenSegmentItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildScreenSegmentItemView.xib; sourceTree = "<group>"; };
-		4E21CCC924E5CEE8001BA065 /* ChildScreenSegmentItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildScreenSegmentItemView.swift; sourceTree = "<group>"; };
-		4E21CCCA24E5CEE8001BA065 /* ChildScreenSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildScreenSegmentView.swift; sourceTree = "<group>"; };
+		4E21CCC724E5CEE8001BA065 /* ZiftTabMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZiftTabMenuView.xib; sourceTree = "<group>"; };
+		4E21CCC824E5CEE8001BA065 /* ZiftTabMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZiftTabMenuItemView.xib; sourceTree = "<group>"; };
+		4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuItemView.swift; sourceTree = "<group>"; };
+		4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuView.swift; sourceTree = "<group>"; };
 		4E283A6C24E5AFFC00C45270 /* ZiftTabMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZiftTabMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E283A6F24E5AFFC00C45270 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E283A7124E5AFFC00C45270 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,10 +56,10 @@
 		4E21CCC624E5CBD7001BA065 /* ZiftTab */ = {
 			isa = PBXGroup;
 			children = (
-				4E21CCC924E5CEE8001BA065 /* ChildScreenSegmentItemView.swift */,
-				4E21CCC824E5CEE8001BA065 /* ChildScreenSegmentItemView.xib */,
-				4E21CCCA24E5CEE8001BA065 /* ChildScreenSegmentView.swift */,
-				4E21CCC724E5CEE8001BA065 /* ChildScreenSegmentView.xib */,
+				4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */,
+				4E21CCC824E5CEE8001BA065 /* ZiftTabMenuItemView.xib */,
+				4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */,
+				4E21CCC724E5CEE8001BA065 /* ZiftTabMenuView.xib */,
 			);
 			path = ZiftTab;
 			sourceTree = "<group>";
@@ -165,9 +165,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E21CCCC24E5CEE8001BA065 /* ChildScreenSegmentItemView.xib in Resources */,
+				4E21CCCC24E5CEE8001BA065 /* ZiftTabMenuItemView.xib in Resources */,
 				4E283A7C24E5AFFE00C45270 /* LaunchScreen.storyboard in Resources */,
-				4E21CCCB24E5CEE8001BA065 /* ChildScreenSegmentView.xib in Resources */,
+				4E21CCCB24E5CEE8001BA065 /* ZiftTabMenuView.xib in Resources */,
 				4E283A7924E5AFFE00C45270 /* Assets.xcassets in Resources */,
 				4E283A7724E5AFFC00C45270 /* Main.storyboard in Resources */,
 			);
@@ -180,7 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E21CCCD24E5CEE8001BA065 /* ChildScreenSegmentItemView.swift in Sources */,
+				4E21CCCD24E5CEE8001BA065 /* ZiftTabMenuItemView.swift in Sources */,
 				4E3B50B024E67431002CA17B /* UIView+Extensions.swift in Sources */,
 				4E283A7424E5AFFC00C45270 /* ViewController.swift in Sources */,
 				4E3B50AC24E66E46002CA17B /* UIColor+Extensions.swift in Sources */,
@@ -188,7 +188,7 @@
 				4E283A7024E5AFFC00C45270 /* AppDelegate.swift in Sources */,
 				4E283A7224E5AFFC00C45270 /* SceneDelegate.swift in Sources */,
 				4E3B50AA24E66D52002CA17B /* UIColor+ziftAdditions.swift in Sources */,
-				4E21CCCE24E5CEE8001BA065 /* ChildScreenSegmentView.swift in Sources */,
+				4E21CCCE24E5CEE8001BA065 /* ZiftTabMenuView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
