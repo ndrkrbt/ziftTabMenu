@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Sofia-Pro-Regular.otf">
+            <string>SofiaProRegular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChildScreenSegmentItemView" customModule="ZiftTabMenu" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="228"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOp-4d-Ig6">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="228"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUo-ud-WRN">
+                            <rect key="frame" x="0.0" y="0.0" width="290" height="228"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="JCe-Iu-hxY">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="228"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="SearchesTabIcon" translatesAutoresizingMaskIntoConstraints="NO" id="BFX-8t-Crf">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="228"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="BFX-8t-Crf" firstAttribute="top" secondItem="JCe-Iu-hxY" secondAttribute="top" id="42h-O8-49L"/>
+                                        <constraint firstAttribute="trailing" secondItem="BFX-8t-Crf" secondAttribute="trailing" placeholder="YES" id="8Xe-nQ-heA"/>
+                                        <constraint firstAttribute="bottom" secondItem="BFX-8t-Crf" secondAttribute="bottom" id="Cf0-gg-bQ6"/>
+                                        <constraint firstItem="BFX-8t-Crf" firstAttribute="leading" secondItem="JCe-Iu-hxY" secondAttribute="leading" placeholder="YES" id="g3P-9d-Xbi"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="qXy-Az-UP2">
+                                    <rect key="frame" x="50" y="0.0" width="240" height="228"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymD-PU-CpN">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="228"/>
+                                            <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.40392156862745099" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="ymD-PU-CpN" firstAttribute="top" secondItem="qXy-Az-UP2" secondAttribute="top" id="EK7-la-8Jq"/>
+                                        <constraint firstAttribute="trailing" secondItem="ymD-PU-CpN" secondAttribute="trailing" id="Ob8-U5-1IH"/>
+                                        <constraint firstAttribute="bottom" secondItem="ymD-PU-CpN" secondAttribute="bottom" id="XJB-7q-2h4"/>
+                                        <constraint firstItem="ymD-PU-CpN" firstAttribute="leading" secondItem="qXy-Az-UP2" secondAttribute="leading" id="pQP-yX-bsM"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqG-tk-zuM">
+                            <rect key="frame" x="0.0" y="0.0" width="290" height="228"/>
+                            <connections>
+                                <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="sMp-vt-pHL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="vUo-ud-WRN" secondAttribute="bottom" id="AB8-8A-pdk"/>
+                        <constraint firstItem="vUo-ud-WRN" firstAttribute="top" secondItem="uOp-4d-Ig6" secondAttribute="top" id="IpZ-5K-1ql"/>
+                        <constraint firstAttribute="trailing" secondItem="IqG-tk-zuM" secondAttribute="trailing" id="JM3-0H-HD5"/>
+                        <constraint firstAttribute="bottom" secondItem="IqG-tk-zuM" secondAttribute="bottom" id="OYV-Gu-vWl"/>
+                        <constraint firstItem="vUo-ud-WRN" firstAttribute="leading" secondItem="uOp-4d-Ig6" secondAttribute="leading" id="QRo-cF-Aaq"/>
+                        <constraint firstItem="IqG-tk-zuM" firstAttribute="leading" secondItem="uOp-4d-Ig6" secondAttribute="leading" id="ULv-4i-Wv7"/>
+                        <constraint firstItem="IqG-tk-zuM" firstAttribute="top" secondItem="uOp-4d-Ig6" secondAttribute="top" id="jd0-bM-hYC"/>
+                        <constraint firstAttribute="trailing" secondItem="vUo-ud-WRN" secondAttribute="trailing" id="oNZ-Ct-dqk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="uOp-4d-Ig6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Fb8-Xj-BwY"/>
+                <constraint firstAttribute="bottom" secondItem="uOp-4d-Ig6" secondAttribute="bottom" id="fPu-AD-lJ3"/>
+                <constraint firstAttribute="trailing" secondItem="uOp-4d-Ig6" secondAttribute="trailing" id="hjT-Ig-As8"/>
+                <constraint firstItem="uOp-4d-Ig6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l2v-di-ape"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backgroundViewContainer" destination="uOp-4d-Ig6" id="i6E-Sj-FeV"/>
+                <outlet property="iconImageView" destination="BFX-8t-Crf" id="oKd-mc-h1F"/>
+                <outlet property="titleLabel" destination="ymD-PU-CpN" id="1vP-Kk-Zhg"/>
+                <outlet property="titleLabelContainer" destination="qXy-Az-UP2" id="P9g-cy-WdB"/>
+            </connections>
+            <point key="canvasLocation" x="84.799999999999997" y="-62.068965517241381"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="SearchesTabIcon" width="23" height="23"/>
+    </resources>
+</document>
