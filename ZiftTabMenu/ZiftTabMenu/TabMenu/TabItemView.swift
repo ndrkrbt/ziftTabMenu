@@ -1,6 +1,6 @@
 //
-//  ZiftTabMenuItemView.swift
-//  zift-parent
+//  TabItemView.swift
+//
 //
 //  Created by Andrey on 13/12/2018.
 //  Copyright © 2018 ESCape-tech. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZiftTabMenuItemView: UIView {
+class TabItemView: UIView {
 
     lazy var containerView = UIView()
     
@@ -48,28 +48,29 @@ class ZiftTabMenuItemView: UIView {
     
     private var selectedTabConstraintGroup: [NSLayoutConstraint] = []
     private var unselectedTabConstraintGroup: [NSLayoutConstraint] = []
-    var tabMenuItemTapHandler: ((Int) -> Void)?
-    var settings: ZiftTabMenuItemSettings
-    var tabMenuIndex: Int = 0
+    
     var id: String
     var title: String
     var iconImage: UIImage
-    var layoutSettings: ZiftTabMenuItemLayoutSettings
+    var tabItemTapHandler: ((Int) -> Void)?
+    var settings: TabItemViewSettings
+    var tabIndex: Int = 0
+    var layoutSettings: TabItemViewLayoutSettings
     
     var isSelected = false {
         didSet {
             if isSelected {
                 containerView.backgroundColor = settings.selectedMeneItemBackground
-                layer.shadowColor = settings.menuItemShadowColor
-                layer.shadowRadius = settings.menuItemShadowRadius
-                layer.shadowOpacity = settings.menuItemShadowOpacity
-                layer.shadowOffset = settings.menuItemShadowOffset
+                layer.shadowColor = settings.tabItemShadowColor
+                layer.shadowRadius = settings.tabItemShadowRadius
+                layer.shadowOpacity = settings.tabItemShadowOpacity
+                layer.shadowOffset = settings.tabItemShadowOffset
                 iconImageView.tintColor = settings.selectedIconTintColor
                 iconImageView.alpha = settings.selectedIconAlpha
             } else {
                 iconImageView.tintColor = settings.unselectedIconTintColor
                 iconImageView.alpha = settings.unselectedIconAlpha
-                layer.shadowOpacity = settings.menuItemShadowOpacity
+                layer.shadowOpacity = settings.tabItemShadowOpacity
                 containerView.backgroundColor = settings.unselectedMeneItemBackground
             }
             configureIconImageViewConstraints(isSelected)
@@ -83,12 +84,12 @@ class ZiftTabMenuItemView: UIView {
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
-    init(settings: ZiftTabMenuItemSettings, id: String, title: String, iconImage: UIImage) {
+    init(settings: TabItemViewSettings, id: String, title: String, iconImage: UIImage) {
         self.id = id
         self.title = title
         self.iconImage = iconImage
         self.settings = settings
-        self.layoutSettings = settings.menuItemLayoutSettings
+        self.layoutSettings = settings.tabItemLayoutSettings
         super.init(frame: CGRect.zero)
         configureContainerView()
         configureConstraintGroups()
@@ -127,7 +128,7 @@ class ZiftTabMenuItemView: UIView {
     }
     
     @objc func buttonTapHandler(_ sender: UIButton) {
-        tabMenuItemTapHandler?(tabMenuIndex)
+        tabItemTapHandler?(tabIndex)
     }
     
     private func configureContainerView() {

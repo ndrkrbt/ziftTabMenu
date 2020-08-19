@@ -1,6 +1,6 @@
 //
-//  TabController.swift
-//  zift-parent
+//  TabView.swift
+//
 //
 //  Created by Filipp Lebedev on 09.04.2018.
 //  Copyright © 2018 ESCape-tech. All rights reserved.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ZiftTabMenuView: UIView {
+class TabView: UIView {
     
-    var settings: ZiftTabMenuSettings
-    var tabMenuItemsArray: [ZiftTabMenuItemView] = []
+    var settings: TabViewSettings
+    var tabItemsArray: [TabItemView] = []
     private var variableConstraintGroup: [NSLayoutConstraint] = []
     private var constantConstraintGroup: [NSLayoutConstraint] = []
     
@@ -31,7 +31,7 @@ class ZiftTabMenuView: UIView {
     }
 
     
-    init(settings: ZiftTabMenuSettings) {
+    init(settings: TabViewSettings) {
         self.settings = settings
         super.init(frame: CGRect.zero)
         configureScrollView()
@@ -44,32 +44,32 @@ class ZiftTabMenuView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
        
-    func addTabMenuItem(tabMenuItem: ZiftTabMenuItemView, tapHandler: @escaping ()->Void) {
-        scrollContainerView.addSubview(tabMenuItem)
-        tabMenuItem.tabMenuItemTapHandler = { [weak self] index in
+    func addTabItem(tabItem: TabItemView, tapHandler: @escaping ()->Void) {
+        scrollContainerView.addSubview(tabItem)
+        tabItem.tabItemTapHandler = { [weak self] index in
             guard let self = self else {
                 return
             }
-            self.recalcTabMenuConstraints(selectedIndex: index)
-            for item in 0..<self.tabMenuItemsArray.count {
-                self.tabMenuItemsArray[item].isSelected = item == index
+            self.recalcTabConstraints(selectedIndex: index)
+            for item in 0..<self.tabItemsArray.count {
+                self.tabItemsArray[item].isSelected = item == index
             }
             tapHandler()
         }
-        tabMenuItem.tabMenuIndex = tabMenuItemsArray.count
-        tabMenuItemsArray.append(tabMenuItem)
+        tabItem.tabIndex = tabItemsArray.count
+        tabItemsArray.append(tabItem)
         configureConstraints()
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    func selectTabMenuItem(index: Int) {
-        tabMenuItemsArray[index].tabMenuItemTapHandler?(index)
+    func selectTabItem(index: Int) {
+        tabItemsArray[index].tabItemTapHandler?(index)
     }
     
-    private func recalcTabMenuConstraints(selectedIndex: Int){
-        var selectedTabWidth: CGFloat = tabMenuItemsArray.count == 1 ? self.frame.width : (frame.width) / CGFloat(tabMenuItemsArray.count) * settings.selectedTabWidthCoef
-        var notselectedTabWidth = tabMenuItemsArray.count == 1 ? self.frame.width : (frame.width - selectedTabWidth)/CGFloat(tabMenuItemsArray.count - 1)
+    private func recalcTabConstraints(selectedIndex: Int){
+        var selectedTabWidth: CGFloat = tabItemsArray.count == 1 ? self.frame.width : (frame.width) / CGFloat(tabItemsArray.count) * settings.selectedTabWidthCoef
+        var notselectedTabWidth = tabItemsArray.count == 1 ? self.frame.width : (frame.width - selectedTabWidth)/CGFloat(tabItemsArray.count - 1)
         
         
         selectedTabWidth = selectedTabWidth < settings.minSelectedWidth ? settings.minSelectedWidth : selectedTabWidth
@@ -78,12 +78,12 @@ class ZiftTabMenuView: UIView {
         
         NSLayoutConstraint.deactivate(variableConstraintGroup)
         variableConstraintGroup = []
-        for index in 0..<tabMenuItemsArray.count {
-            if index == selectedIndex { variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: selectedTabWidth))
-                variableConstraintGroup.append(tabMenuItemsArray[index].topAnchor.constraint(equalTo: tabMenuItemsArray[index].superview!.topAnchor))
+        for index in 0..<tabItemsArray.count {
+            if index == selectedIndex { variableConstraintGroup.append(tabItemsArray[index].widthAnchor.constraint(equalToConstant: selectedTabWidth))
+                variableConstraintGroup.append(tabItemsArray[index].topAnchor.constraint(equalTo: tabItemsArray[index].superview!.topAnchor))
             } else {
-                variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: notselectedTabWidth))
-                variableConstraintGroup.append(tabMenuItemsArray[index].topAnchor.constraint(equalTo: tabMenuItemsArray[index].superview!.topAnchor, constant: settings.notSelectedTabTopOffset))
+                variableConstraintGroup.append(tabItemsArray[index].widthAnchor.constraint(equalToConstant: notselectedTabWidth))
+                variableConstraintGroup.append(tabItemsArray[index].topAnchor.constraint(equalTo: tabItemsArray[index].superview!.topAnchor, constant: settings.notSelectedTabTopOffset))
             }
         }
         NSLayoutConstraint.activate(variableConstraintGroup)
@@ -96,31 +96,31 @@ class ZiftTabMenuView: UIView {
         
         constantConstraintGroup = []
         variableConstraintGroup = []
-        if tabMenuItemsArray.count > 0 {
+        if tabItemsArray.count > 0 {
             
-            constantConstraintGroup.append(tabMenuItemsArray[0].leadingAnchor
-                .constraint(equalTo: tabMenuItemsArray[0].superview!.leadingAnchor))
-            constantConstraintGroup.append(tabMenuItemsArray[tabMenuItemsArray.count - 1].trailingAnchor
-                .constraint(equalTo: tabMenuItemsArray[tabMenuItemsArray.count - 1].superview!.trailingAnchor))
+            constantConstraintGroup.append(tabItemsArray[0].leadingAnchor
+                .constraint(equalTo: tabItemsArray[0].superview!.leadingAnchor))
+            constantConstraintGroup.append(tabItemsArray[tabItemsArray.count - 1].trailingAnchor
+                .constraint(equalTo: tabItemsArray[tabItemsArray.count - 1].superview!.trailingAnchor))
             
-            for index in 0..<tabMenuItemsArray.count {
-                let item = tabMenuItemsArray[index]
+            for index in 0..<tabItemsArray.count {
+                let item = tabItemsArray[index]
                 constantConstraintGroup.append(item.bottomAnchor
                     .constraint(equalTo: item.superview!.bottomAnchor))
-                if tabMenuItemsArray.indices.contains(index + 1) {
-                    constantConstraintGroup.append(tabMenuItemsArray[index].trailingAnchor
-                        .constraint(equalTo: tabMenuItemsArray[index + 1].leadingAnchor))
+                if tabItemsArray.indices.contains(index + 1) {
+                    constantConstraintGroup.append(tabItemsArray[index].trailingAnchor
+                        .constraint(equalTo: tabItemsArray[index + 1].leadingAnchor))
                 }
             }
             
             NSLayoutConstraint.activate(constantConstraintGroup)
             
-            for index in 0..<tabMenuItemsArray.count {
-                variableConstraintGroup.append(tabMenuItemsArray[index].topAnchor
-                    .constraint(equalTo: tabMenuItemsArray[index].superview!.topAnchor))
-                if tabMenuItemsArray.indices.contains(index + 1) {
-                    variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor
-                        .constraint(equalTo: tabMenuItemsArray[index + 1].widthAnchor))
+            for index in 0..<tabItemsArray.count {
+                variableConstraintGroup.append(tabItemsArray[index].topAnchor
+                    .constraint(equalTo: tabItemsArray[index].superview!.topAnchor))
+                if tabItemsArray.indices.contains(index + 1) {
+                    variableConstraintGroup.append(tabItemsArray[index].widthAnchor
+                        .constraint(equalTo: tabItemsArray[index + 1].widthAnchor))
                 }
             }
             NSLayoutConstraint.activate(variableConstraintGroup)

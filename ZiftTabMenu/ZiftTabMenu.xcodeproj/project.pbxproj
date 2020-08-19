@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E21CCCD24E5CEE8001BA065 /* ZiftTabMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */; };
-		4E21CCCE24E5CEE8001BA065 /* ZiftTabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */; };
+		4E21CCCD24E5CEE8001BA065 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCC924E5CEE8001BA065 /* TabItemView.swift */; };
+		4E21CCCE24E5CEE8001BA065 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21CCCA24E5CEE8001BA065 /* TabView.swift */; };
 		4E26E72824ED12650062181F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26E72724ED12650062181F /* UIColor+Extensions.swift */; };
-		4E26E72A24ED15700062181F /* ZiftTabMenuItemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26E72924ED15700062181F /* ZiftTabMenuItemSettings.swift */; };
-		4E26E72D24ED30330062181F /* ZiftTabMenuSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26E72C24ED30330062181F /* ZiftTabMenuSettings.swift */; };
+		4E26E72A24ED15700062181F /* TabItemViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26E72924ED15700062181F /* TabItemViewSettings.swift */; };
+		4E26E72D24ED30330062181F /* TabViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26E72C24ED30330062181F /* TabViewSettings.swift */; };
 		4E283A7024E5AFFC00C45270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A6F24E5AFFC00C45270 /* AppDelegate.swift */; };
 		4E283A7224E5AFFC00C45270 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A7124E5AFFC00C45270 /* SceneDelegate.swift */; };
 		4E283A7424E5AFFC00C45270 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E283A7324E5AFFC00C45270 /* ViewController.swift */; };
@@ -22,11 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuItemView.swift; sourceTree = "<group>"; };
-		4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuView.swift; sourceTree = "<group>"; };
+		4E21CCC924E5CEE8001BA065 /* TabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		4E21CCCA24E5CEE8001BA065 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		4E26E72724ED12650062181F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		4E26E72924ED15700062181F /* ZiftTabMenuItemSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuItemSettings.swift; sourceTree = "<group>"; };
-		4E26E72C24ED30330062181F /* ZiftTabMenuSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZiftTabMenuSettings.swift; sourceTree = "<group>"; };
+		4E26E72924ED15700062181F /* TabItemViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemViewSettings.swift; sourceTree = "<group>"; };
+		4E26E72C24ED30330062181F /* TabViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSettings.swift; sourceTree = "<group>"; };
 		4E283A6C24E5AFFC00C45270 /* ZiftTabMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZiftTabMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E283A6F24E5AFFC00C45270 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E283A7124E5AFFC00C45270 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,15 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4E21CCC624E5CBD7001BA065 /* ZiftTab */ = {
+		4E21CCC624E5CBD7001BA065 /* TabMenu */ = {
 			isa = PBXGroup;
 			children = (
-				4E21CCC924E5CEE8001BA065 /* ZiftTabMenuItemView.swift */,
-				4E21CCCA24E5CEE8001BA065 /* ZiftTabMenuView.swift */,
-				4E26E72924ED15700062181F /* ZiftTabMenuItemSettings.swift */,
-				4E26E72C24ED30330062181F /* ZiftTabMenuSettings.swift */,
+				4E21CCC924E5CEE8001BA065 /* TabItemView.swift */,
+				4E21CCCA24E5CEE8001BA065 /* TabView.swift */,
+				4E26E72924ED15700062181F /* TabItemViewSettings.swift */,
+				4E26E72C24ED30330062181F /* TabViewSettings.swift */,
 			);
-			path = ZiftTab;
+			path = TabMenu;
 			sourceTree = "<group>";
 		};
 		4E283A6324E5AFFC00C45270 = {
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				4E3B50A824E66CED002CA17B /* Extensions */,
-				4E21CCC624E5CBD7001BA065 /* ZiftTab */,
+				4E21CCC624E5CBD7001BA065 /* TabMenu */,
 				4E283A6F24E5AFFC00C45270 /* AppDelegate.swift */,
 				4E283A7124E5AFFC00C45270 /* SceneDelegate.swift */,
 				4E283A7324E5AFFC00C45270 /* ViewController.swift */,
@@ -172,15 +172,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E21CCCD24E5CEE8001BA065 /* ZiftTabMenuItemView.swift in Sources */,
+				4E21CCCD24E5CEE8001BA065 /* TabItemView.swift in Sources */,
 				4E283A7424E5AFFC00C45270 /* ViewController.swift in Sources */,
 				4E283A7024E5AFFC00C45270 /* AppDelegate.swift in Sources */,
 				4E283A7224E5AFFC00C45270 /* SceneDelegate.swift in Sources */,
 				4E26E72824ED12650062181F /* UIColor+Extensions.swift in Sources */,
 				4E3B50AA24E66D52002CA17B /* UIColor+ziftAdditions.swift in Sources */,
-				4E26E72D24ED30330062181F /* ZiftTabMenuSettings.swift in Sources */,
-				4E26E72A24ED15700062181F /* ZiftTabMenuItemSettings.swift in Sources */,
-				4E21CCCE24E5CEE8001BA065 /* ZiftTabMenuView.swift in Sources */,
+				4E26E72D24ED30330062181F /* TabViewSettings.swift in Sources */,
+				4E26E72A24ED15700062181F /* TabItemViewSettings.swift in Sources */,
+				4E21CCCE24E5CEE8001BA065 /* TabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
