@@ -15,7 +15,7 @@ class ZiftTabMenuView: UIView {
     private var variableConstraintGroup: [NSLayoutConstraint] = []
     private var constantConstraintGroup: [NSLayoutConstraint] = []
     
-    lazy var containerView = UIView()
+    lazy var notSelectedContainerView = UIView()
     lazy var scrollContainerView = UIView()
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -26,8 +26,8 @@ class ZiftTabMenuView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.layer.cornerRadius = 12
-        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        notSelectedContainerView.layer.cornerRadius = 12
+        notSelectedContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
 
     
@@ -35,8 +35,8 @@ class ZiftTabMenuView: UIView {
         self.settings = settings
         super.init(frame: CGRect.zero)
         configureScrollView()
-        configureContainerView()
-        containerView.backgroundColor = settings.backgroundColor
+        configureNotselectedContainerView()
+        notSelectedContainerView.backgroundColor = settings.backgroundColor
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -127,13 +127,13 @@ class ZiftTabMenuView: UIView {
         }
     }
     
-    private func configureContainerView() {
-        scrollContainerView.addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: settings.notSelectedTabTopOffset).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor).isActive = true
+    private func configureNotselectedContainerView() {
+        scrollContainerView.addSubview(notSelectedContainerView)
+        notSelectedContainerView.translatesAutoresizingMaskIntoConstraints = false
+        notSelectedContainerView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: settings.notSelectedTabTopOffset).isActive = true
+        notSelectedContainerView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor).isActive = true
+        notSelectedContainerView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor).isActive = true
+        notSelectedContainerView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor).isActive = true
     }
     
     
@@ -158,7 +158,6 @@ class ZiftTabMenuView: UIView {
         scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
         configureScrollContainer()
     }
 }
