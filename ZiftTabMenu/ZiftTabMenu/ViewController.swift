@@ -31,23 +31,23 @@ class ViewController: UIViewController {
     
     func configureTabMenuItems() {
         
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Searches", title: "Searches", titleOffset: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0), iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: tabMenuView.settings.tabMenuItemSettings, id: "Searches", title: "Searches", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
         
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Screentime", title: "Screentime", iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: tabMenuView.settings.tabMenuItemSettings, id: "Screentime", title: "Screentime", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
         
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Blocks", title: "Blocks & Alerts", iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: tabMenuView.settings.tabMenuItemSettings,id: "Blocks", title: "Blocks & Alerts", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
         
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "YouTube", title: "YouTube", iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: tabMenuView.settings.tabMenuItemSettings,id: "YouTube", title: "YouTube", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
-
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Location", title: "Location", iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: tabMenuView.settings.tabMenuItemSettings,id: "Location", title: "Location", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
     }
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         guard let selectedMenuItem = tabMenuView.tabMenuItemsArray.filter({$0.isSelected}).first else {
             return
         }
-        print(selectedMenuItem.settings.id)
+        print(selectedMenuItem.id)
     }
 }
 

@@ -14,12 +14,20 @@ struct ZiftTabMenuSettings {
     var notSelectedTabTopOffset: CGFloat
     var minSelectedWidth: CGFloat
     var minNotselectedWidth: CGFloat
+    var tabMenuItemSettings: ZiftTabMenuItemSettings
     
-    init(backgroundColor: UIColor = .white, selectedTabWidthCoef: CGFloat = 1.83, notSelectedTabTopOffset: CGFloat = 7, minSelectedWidth: CGFloat = 140, minNotselectedWidth: CGFloat = 50) {
+    init(backgroundColor: UIColor = .white,
+         selectedTabWidthCoef: CGFloat = 1.83,
+         notSelectedTabTopOffset: CGFloat = 7,
+         minSelectedWidth: CGFloat = 140,
+         minNotselectedWidth: CGFloat = 50,
+         tabMenuItemSettings: ZiftTabMenuItemSettings = ZiftTabMenuItemSettings()) {
+        
         self.backgroundColor = backgroundColor
         self.selectedTabWidthCoef = selectedTabWidthCoef
         self.notSelectedTabTopOffset = notSelectedTabTopOffset
         self.minSelectedWidth = minSelectedWidth
         self.minNotselectedWidth = minNotselectedWidth
+        self.tabMenuItemSettings = ZiftTabMenuItemSettings()
     }
 }

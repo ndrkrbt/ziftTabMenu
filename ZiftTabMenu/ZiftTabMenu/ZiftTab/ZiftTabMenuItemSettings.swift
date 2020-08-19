@@ -9,15 +9,10 @@
 import UIKit
 
 struct ZiftTabMenuItemSettings {
-    let id: String
-    let title: String
     var titleColor: UIColor
-    var titleOffset: UIEdgeInsets
+    var menuItemLayoutSettings: ZiftTabMenuItemLayoutSettings
     var titleAligment: NSTextAlignment
     var titleFont: UIFont
-    let iconImage: UIImage
-    var selectedIconOffset: UIEdgeInsets
-    var unselectedIconOffset: UIEdgeInsets
     var selectedMeneItemBackground: UIColor
     var menuItemShadowColor: CGColor
     var menuItemShadowRadius: CGFloat
@@ -29,16 +24,12 @@ struct ZiftTabMenuItemSettings {
     var unselectedIconAlpha: CGFloat
     var unselectedMeneItemBackground: UIColor
     
-    init(id: String,
-         title: String,
-         titleColor: UIColor = .ziftSelectedTabTitle,
-         titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+    init(titleColor: UIColor = .ziftSelectedTabTitle,
+         menuItemLayoutSettings: ZiftTabMenuItemLayoutSettings = ZiftTabMenuItemLayoutSettings(),
          titleAligment: NSTextAlignment = .left,
          titleFont: UIFont = .systemFont(ofSize: 14),
-         iconImage: UIImage,
-         selectedIconOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -5),
-         unselectedIconOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
-         selectedMeneItemBackground: UIColor = .white, menuItemShadowColor: CGColor = UIColor.black.cgColor,
+         selectedMeneItemBackground: UIColor = .white,
+         menuItemShadowColor: CGColor = UIColor.black.cgColor,
          menuItemShadowRadius: CGFloat = 6.0,
          menuItemShadowOpacity: Float = 0.18,
          menuItemShadowOffset: CGSize = CGSize(width: 0, height: 3),
@@ -48,15 +39,10 @@ struct ZiftTabMenuItemSettings {
          unselectedIconAlpha: CGFloat = 0.4,
          unselectedMeneItemBackground: UIColor = .clear) {
         
-        self.id = id
-        self.title = title
         self.titleColor = titleColor
-        self.titleOffset = titleOffset
+        self.menuItemLayoutSettings = menuItemLayoutSettings
         self.titleAligment = titleAligment
         self.titleFont = titleFont
-        self.iconImage = iconImage
-        self.selectedIconOffset = selectedIconOffset
-        self.unselectedIconOffset = unselectedIconOffset
         self.selectedMeneItemBackground = selectedMeneItemBackground
         self.menuItemShadowColor = menuItemShadowColor
         self.menuItemShadowRadius = menuItemShadowRadius
@@ -67,5 +53,19 @@ struct ZiftTabMenuItemSettings {
         self.unselectedIconTintColor = unselectedIconTintColor
         self.unselectedIconAlpha = unselectedIconAlpha
         self.unselectedMeneItemBackground = unselectedMeneItemBackground
+    }
+}
+
+struct ZiftTabMenuItemLayoutSettings {
+    var titleOffset: UIEdgeInsets
+    var selectedIconOffset: UIEdgeInsets
+    var unselectedIconOffset: UIEdgeInsets
+    
+    init(titleOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+         selectedIconOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -5),
+         unselectedIconOffset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+        self.titleOffset = titleOffset
+        self.selectedIconOffset = selectedIconOffset
+        self.unselectedIconOffset = unselectedIconOffset
     }
 }

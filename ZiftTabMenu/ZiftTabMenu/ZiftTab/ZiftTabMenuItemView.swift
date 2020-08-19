@@ -24,7 +24,7 @@ class ZiftTabMenuItemView: UIView {
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .center
-        imageView.image = settings.iconImage
+        imageView.image = iconImage
         return imageView
     }()
     
@@ -33,6 +33,7 @@ class ZiftTabMenuItemView: UIView {
         label.font = settings.titleFont
         label.textColor = settings.titleColor
         label.textAlignment = settings.titleAligment
+        label.text = title
         return label
     }()
    
@@ -50,6 +51,10 @@ class ZiftTabMenuItemView: UIView {
     var tabMenuItemTapHandler: ((Int) -> Void)?
     var settings: ZiftTabMenuItemSettings
     var tabMenuIndex: Int = 0
+    var id: String
+    var title: String
+    var iconImage: UIImage
+    var layoutSettings: ZiftTabMenuItemLayoutSettings
     
     var isSelected = false {
         didSet {
@@ -78,12 +83,15 @@ class ZiftTabMenuItemView: UIView {
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
-    init(settings: ZiftTabMenuItemSettings) {
+    init(settings: ZiftTabMenuItemSettings, id: String, title: String, iconImage: UIImage) {
+        self.id = id
+        self.title = title
+        self.iconImage = iconImage
         self.settings = settings
+        self.layoutSettings = settings.menuItemLayoutSettings
         super.init(frame: CGRect.zero)
         configureContainerView()
         configureConstraintGroups()
-        configureTitle(title: settings.title)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -104,22 +112,18 @@ class ZiftTabMenuItemView: UIView {
     
     private func configureConstraintGroups(){
         selectedTabConstraintGroup = [
-            iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: settings.selectedIconOffset.left),
-            iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: settings.selectedIconOffset.right),
-            iconImageView.topAnchor.constraint(equalTo: iconImageView.superview!.topAnchor, constant: settings.selectedIconOffset.top),
-            iconImageView.bottomAnchor.constraint(equalTo: iconImageView.superview!.bottomAnchor, constant: settings.selectedIconOffset.bottom)
+            iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: layoutSettings.selectedIconOffset.left),
+            iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: layoutSettings.selectedIconOffset.right),
+            iconImageView.topAnchor.constraint(equalTo: iconImageView.superview!.topAnchor, constant: layoutSettings.selectedIconOffset.top),
+            iconImageView.bottomAnchor.constraint(equalTo: iconImageView.superview!.bottomAnchor, constant: layoutSettings.selectedIconOffset.bottom)
         ]
         
         unselectedTabConstraintGroup = [
-            iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: settings.unselectedIconOffset.left),
-            iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: settings.unselectedIconOffset.right),
-            iconImageView.topAnchor.constraint(equalTo: iconImageView.superview!.topAnchor, constant: settings.unselectedIconOffset.top),
-            iconImageView.bottomAnchor.constraint(equalTo: iconImageView.superview!.bottomAnchor, constant: settings.unselectedIconOffset.bottom)
+            iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: layoutSettings.unselectedIconOffset.left),
+            iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: layoutSettings.unselectedIconOffset.right),
+            iconImageView.topAnchor.constraint(equalTo: iconImageView.superview!.topAnchor, constant: layoutSettings.unselectedIconOffset.top),
+            iconImageView.bottomAnchor.constraint(equalTo: iconImageView.superview!.bottomAnchor, constant: layoutSettings.unselectedIconOffset.bottom)
         ]
-    }
-    
-    private func configureTitle(title: String){
-        titleLabel.text = title
     }
     
     @objc func buttonTapHandler(_ sender: UIButton) {
@@ -156,10 +160,10 @@ class ZiftTabMenuItemView: UIView {
         titleContainerView.addSubview(titleLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraint(equalTo: titleLabel.superview!.topAnchor, constant: settings.titleOffset.top).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: titleLabel.superview!.leadingAnchor, constant: settings.titleOffset.left).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: titleLabel.superview!.trailingAnchor, constant: settings.titleOffset.right).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: titleLabel.superview!.bottomAnchor, constant: settings.titleOffset.bottom).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: titleLabel.superview!.topAnchor, constant: layoutSettings.titleOffset.top).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: titleLabel.superview!.leadingAnchor, constant: layoutSettings.titleOffset.left).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: titleLabel.superview!.trailingAnchor, constant: layoutSettings.titleOffset.right).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: titleLabel.superview!.bottomAnchor, constant: layoutSettings.titleOffset.bottom).isActive = true
         
         iconContainerView.addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
