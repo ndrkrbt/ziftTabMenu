@@ -14,8 +14,8 @@ class ZiftTabMenuView: UIView {
     var notSelectedTabTopOffset: CGFloat = 7
     
     var tabMenuItemsArray: [ZiftTabMenuItemView] = []
-    var variableConstraintGroup: [NSLayoutConstraint] = []
-    var constantConstraintGroup: [NSLayoutConstraint] = []
+    private var variableConstraintGroup: [NSLayoutConstraint] = []
+    private var constantConstraintGroup: [NSLayoutConstraint] = []
     
     lazy var containerView = UIView()
     
