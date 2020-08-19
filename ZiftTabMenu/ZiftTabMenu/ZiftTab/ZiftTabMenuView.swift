@@ -74,7 +74,7 @@ class ZiftTabMenuView: UIView {
         
         selectedTabWidth = selectedTabWidth < settings.minSelectedWidth ? settings.minSelectedWidth : selectedTabWidth
         
-        notselectedTabWidth = notselectedTabWidth < settings.notSelectedTabTopOffset ? settings.notSelectedTabTopOffset : notselectedTabWidth
+        notselectedTabWidth = notselectedTabWidth < settings.minNotselectedWidth ? settings.minNotselectedWidth : notselectedTabWidth
         
         NSLayoutConstraint.deactivate(variableConstraintGroup)
         variableConstraintGroup = []
@@ -82,9 +82,7 @@ class ZiftTabMenuView: UIView {
             if index == selectedIndex { variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: selectedTabWidth))
                 variableConstraintGroup.append(tabMenuItemsArray[index].topAnchor.constraint(equalTo: tabMenuItemsArray[index].superview!.topAnchor))
             } else {
-                if tabMenuItemsArray.indices.contains(index + 1) {
-                    variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: notselectedTabWidth))
-                }
+                variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: notselectedTabWidth))
                 variableConstraintGroup.append(tabMenuItemsArray[index].topAnchor.constraint(equalTo: tabMenuItemsArray[index].superview!.topAnchor, constant: settings.notSelectedTabTopOffset))
             }
         }

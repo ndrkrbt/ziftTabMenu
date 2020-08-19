@@ -15,7 +15,7 @@ struct ZiftTabMenuSettings {
     var minSelectedWidth: CGFloat
     var minNotselectedWidth: CGFloat
     
-    init(backgroundColor: UIColor = .white, selectedTabWidthCoef: CGFloat = 1.83, notSelectedTabTopOffset: CGFloat = 7, minSelectedWidth: CGFloat = 100, minNotselectedWidth: CGFloat = 40) {
+    init(backgroundColor: UIColor = .white, selectedTabWidthCoef: CGFloat = 1.83, notSelectedTabTopOffset: CGFloat = 7, minSelectedWidth: CGFloat = 140, minNotselectedWidth: CGFloat = 50) {
         self.backgroundColor = backgroundColor
         self.selectedTabWidthCoef = selectedTabWidthCoef
         self.notSelectedTabTopOffset = notSelectedTabTopOffset
