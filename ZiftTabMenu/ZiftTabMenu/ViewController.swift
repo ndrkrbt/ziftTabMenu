@@ -14,11 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         configureTabMenuConstraints()
         configureTabMenuItems()
-        tabMenuView.configure(backgroundColor: .white)
         tabMenuView.selectTabMenuItem(index: 0)
     }
     
-    var tabMenuView = ZiftTabMenuView()
+    var tabMenuView = ZiftTabMenuView(settings: ZiftTabMenuSettings())
     
     func configureTabMenuConstraints() {
         view.addSubview(tabMenuView)
