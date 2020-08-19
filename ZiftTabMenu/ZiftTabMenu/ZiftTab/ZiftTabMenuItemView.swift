@@ -83,7 +83,7 @@ class ZiftTabMenuItemView: UIView {
         super.init(frame: CGRect.zero)
         configureContainerView()
         configureConstraintGroups()
-       configureTitle(title: settings.title)
+        configureTitle(title: settings.title)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
