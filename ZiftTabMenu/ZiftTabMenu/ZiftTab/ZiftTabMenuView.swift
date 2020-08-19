@@ -16,6 +16,13 @@ class ZiftTabMenuView: UIView {
     private var constantConstraintGroup: [NSLayoutConstraint] = []
     
     lazy var containerView = UIView()
+    lazy var scrollContainerView = UIView()
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = false
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -27,6 +34,7 @@ class ZiftTabMenuView: UIView {
     init(settings: ZiftTabMenuSettings) {
         self.settings = settings
         super.init(frame: CGRect.zero)
+        configureScrollView()
         configureContainerView()
         containerView.backgroundColor = settings.backgroundColor
         translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +45,7 @@ class ZiftTabMenuView: UIView {
     }
        
     func addTabMenuItem(tabMenuItem: ZiftTabMenuItemView, tapHandler: @escaping ()->Void) {
-        addSubview(tabMenuItem)
+        scrollContainerView.addSubview(tabMenuItem)
         tabMenuItem.tabMenuItemTapHandler = { [weak self] index in
             guard let self = self else {
                 return
@@ -122,11 +130,37 @@ class ZiftTabMenuView: UIView {
     }
     
     private func configureContainerView() {
-        self.addSubview(containerView)
+        scrollContainerView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: settings.notSelectedTabTopOffset).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: settings.notSelectedTabTopOffset).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollContainerView.bottomAnchor).isActive = true
+    }
+    
+    
+    private func configureScrollContainer() {
+        scrollView.addSubview(scrollContainerView)
+        scrollContainerView.translatesAutoresizingMaskIntoConstraints = false
+        scrollContainerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        scrollContainerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        scrollContainerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        scrollContainerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        scrollContainerView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        let widthConstraint = scrollContainerView.widthAnchor.constraint(equalToConstant: 1000)
+        widthConstraint.priority = UILayoutPriority(rawValue: 100)
+        widthConstraint.isActive = true
+    }
+    
+    
+    private func configureScrollView() {
+        self.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        configureScrollContainer()
     }
 }
