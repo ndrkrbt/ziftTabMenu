@@ -11,6 +11,7 @@ import UIKit
 class ZiftTabMenuItemView: UIView {
 
     lazy var containerView = UIView()
+    
     lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -34,7 +35,9 @@ class ZiftTabMenuItemView: UIView {
         label.textAlignment = .left
         return label
     }()
+   
     lazy var titleContainerView = UIView()
+   
     lazy var button: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
@@ -42,8 +45,8 @@ class ZiftTabMenuItemView: UIView {
         return button
     }()
     
-    var selectedTabConstraintGroup: [NSLayoutConstraint] = []
-    var unselectedTabConstraintGroup: [NSLayoutConstraint] = []
+    private var selectedTabConstraintGroup: [NSLayoutConstraint] = []
+    private var unselectedTabConstraintGroup: [NSLayoutConstraint] = []
     var tabMenuItemTapHandler: ((Int) -> Void)?
     var settings: ZiftTabMenuItemSettings
     var tabMenuIndex: Int = 0
@@ -71,7 +74,8 @@ class ZiftTabMenuItemView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.roundCorners([.topLeft, .topRight], radius: 12)
+        containerView.layer.cornerRadius = 12
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     init(settings: ZiftTabMenuItemSettings) {
@@ -80,14 +84,14 @@ class ZiftTabMenuItemView: UIView {
         configureContainerView()
         configureConstraintGroups()
         configureTitle(title: settings.title, titleColor: settings.titleColor, aligment: settings.titleAligment)
-        self.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureIconImageViewConstraints(_ isSelected: Bool) {
+    private func configureIconImageViewConstraints(_ isSelected: Bool) {
         if isSelected {
             NSLayoutConstraint.deactivate(unselectedTabConstraintGroup)
             NSLayoutConstraint.activate(selectedTabConstraintGroup)
@@ -98,7 +102,7 @@ class ZiftTabMenuItemView: UIView {
         }
     }
     
-    func configureConstraintGroups(){
+    private func configureConstraintGroups(){
         selectedTabConstraintGroup = [
             iconImageView.leadingAnchor.constraint(equalTo: iconImageView.superview!.leadingAnchor, constant: settings.selectedIconOffset.left),
             iconImageView.trailingAnchor.constraint(equalTo: iconImageView.superview!.trailingAnchor, constant: settings.selectedIconOffset.right),
@@ -114,19 +118,17 @@ class ZiftTabMenuItemView: UIView {
         ]
     }
     
-    func configureTitle(title: String, titleColor: UIColor = .ziftSelectedTabTitle, aligment: NSTextAlignment){
+    private func configureTitle(title: String, titleColor: UIColor = .ziftSelectedTabTitle, aligment: NSTextAlignment){
         titleLabel.text = title
         titleLabel.textColor = titleColor
         titleLabel.textAlignment = aligment
     }
-                        
     
     @objc func buttonTapHandler(_ sender: UIButton) {
         tabMenuItemTapHandler?(tabMenuIndex)
     }
     
-    
-    func configureContainerView() {
+    private func configureContainerView() {
         self.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -136,10 +138,11 @@ class ZiftTabMenuItemView: UIView {
         
         configureStackView()
         configureStackContainers()
+        configureButton()
     }
     
-    func configureStackView() {
-        self.containerView.addSubview(stackView)
+    private func configureStackView() {
+        containerView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: stackView.superview!.topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: stackView.superview!.leadingAnchor).isActive = true
@@ -147,59 +150,30 @@ class ZiftTabMenuItemView: UIView {
         stackView.bottomAnchor.constraint(equalTo: stackView.superview!.bottomAnchor).isActive = true
     }
     
-    func configureStackContainers() {
-        self.stackView.addArrangedSubview(iconContainerView)
-        
-        self.stackView.addArrangedSubview(titleContainerView)
+    private func configureStackContainers() {
+        stackView.addArrangedSubview(iconContainerView)
+        stackView.addArrangedSubview(titleContainerView)
         iconContainerView.translatesAutoresizingMaskIntoConstraints = false
         titleContainerView.translatesAutoresizingMaskIntoConstraints = false
+        titleContainerView.addSubview(titleLabel)
         
-        
-        self.titleContainerView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: titleLabel.superview!.topAnchor, constant: settings.titleOffset.top).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: titleLabel.superview!.leadingAnchor, constant: settings.titleOffset.left).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: titleLabel.superview!.trailingAnchor, constant: settings.titleOffset.right).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: titleLabel.superview!.bottomAnchor, constant: settings.titleOffset.bottom).isActive = true
         
-        self.iconContainerView.addSubview(iconImageView)
+        iconContainerView.addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.setContentHuggingPriority(UILayoutPriority(rawValue: 751), for: .horizontal)
-        
+    }
+    
+    private func configureButton() {
         self.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         button.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         button.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-               
     }
-}
-
-struct ZiftTabMenuItemSettings {
-    let id: String
-    let title: String
-    let titleColor: UIColor = .ziftSelectedTabTitle
-    let titleOffset: Offset = Offset(top: 0, bottom: 0, left: 0, right: 0)
-    let titleAligment: NSTextAlignment = .left
-    let iconImage: UIImage
-    let selectedIconOffset: Offset = Offset(top: 0, bottom: 0, left: 15, right: -5)
-    let unselectedIconOffset: Offset = Offset(top: 0, bottom: 0, left: 0, right: 0)
-    let selectedMeneItemBackground: UIColor = .white
-    let menuItemShadowColor: CGColor = UIColor.black.cgColor
-    let menuItemShadowRadius: CGFloat = 6.0
-    let menuItemShadowOpacity: Float = 0.18
-    let menuItemShadowOffset: CGSize = CGSize(width: 0, height: 3)
-    let selectedIconTintColor: UIColor = .ziftSelectedTabTitle
-    let selectedIconAlpha: CGFloat = 1
-    let unselectedIconTintColor: UIColor = .black
-    let unselectedIconAlpha: CGFloat = 0.4
-    let unselectedMeneItemBackground: UIColor = .clear
-}
-
-struct Offset {
-    let top: CGFloat
-    let bottom: CGFloat
-    let left: CGFloat
-    let right: CGFloat
 }

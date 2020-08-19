@@ -10,6 +10,6 @@ import UIKit
 
 extension UIColor {
     @nonobjc class var ziftSelectedTabTitle: UIColor {
-        return UIColor.init(hex: "8067B7")!
+        return UIColor.init(hex: "#8067B7FF")!
     }
 }

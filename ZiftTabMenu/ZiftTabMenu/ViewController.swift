@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     func configureTabMenuItems() {
  
-        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Searches", title: "Searches", iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
+        tabMenuView.addTabMenuItem(tabMenuItem: ZiftTabMenuItemView(settings: ZiftTabMenuItemSettings(id: "Searches", title: "Searches", titleOffset: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0), iconImage: UIImage(named: "SearchesTabIcon")!)), tapHandler:  { [weak self] in
             self?.tabMenuSelectedHandler()
         })
 
@@ -59,7 +59,6 @@ class ViewController: UIViewController {
         guard let selectedMenuItem = tabMenuView.tabMenuItemsArray.filter({$0.isSelected}).first else {
             return
         }
-        
         print(selectedMenuItem.settings.id)
     }
 }

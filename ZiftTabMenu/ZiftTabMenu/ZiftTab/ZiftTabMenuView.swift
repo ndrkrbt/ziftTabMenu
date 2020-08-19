@@ -21,7 +21,8 @@ class ZiftTabMenuView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.roundCorners([.topLeft, .topRight], radius: 12)
+        containerView.layer.cornerRadius = 12
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     init() {
@@ -34,10 +35,7 @@ class ZiftTabMenuView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
        
-       
-    
-    func addTabMenuItem(tabMenuItem: ZiftTabMenuItemView,
-                        tapHandler: @escaping ()->Void) {
+    func addTabMenuItem(tabMenuItem: ZiftTabMenuItemView, tapHandler: @escaping ()->Void) {
         addSubview(tabMenuItem)
         tabMenuItem.tabMenuItemTapHandler = { [weak self] index in
             guard let self = self else {
@@ -52,8 +50,8 @@ class ZiftTabMenuView: UIView {
         tabMenuItem.tabMenuIndex = tabMenuItemsArray.count
         tabMenuItemsArray.append(tabMenuItem)
         configureConstraints()
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
+        setNeedsLayout()
+        layoutIfNeeded()
     }
     
     func selectTabMenuItem(index: Int) {
@@ -66,12 +64,11 @@ class ZiftTabMenuView: UIView {
         self.notSelectedTabTopOffset = notSelectedTabTopOffset
     }
     
-    func recalcTabMenuConstraints(selectedIndex: Int){
+    private func recalcTabMenuConstraints(selectedIndex: Int){
         let selectedTabWidth: CGFloat = tabMenuItemsArray.count == 1 ? self.frame.width : (frame.width) / CGFloat(tabMenuItemsArray.count) * selectedTabWidthCoef
         let notselectedTabWidth = tabMenuItemsArray.count == 1 ? self.frame.width : (frame.width - selectedTabWidth)/CGFloat(tabMenuItemsArray.count - 1)
         
         NSLayoutConstraint.deactivate(variableConstraintGroup)
-        
         variableConstraintGroup = []
         for index in 0..<tabMenuItemsArray.count {
             if index == selectedIndex { variableConstraintGroup.append(tabMenuItemsArray[index].widthAnchor.constraint(equalToConstant: selectedTabWidth))
@@ -86,10 +83,8 @@ class ZiftTabMenuView: UIView {
         NSLayoutConstraint.activate(variableConstraintGroup)
     }
     
-    func configureConstraints() {
-        
-        
-        
+    
+    private func configureConstraints() {
         NSLayoutConstraint.deactivate(constantConstraintGroup)
         NSLayoutConstraint.deactivate(variableConstraintGroup)
         
@@ -99,8 +94,6 @@ class ZiftTabMenuView: UIView {
             
             constantConstraintGroup.append(tabMenuItemsArray[0].leadingAnchor
                 .constraint(equalTo: tabMenuItemsArray[0].superview!.leadingAnchor))
-            
-            
             constantConstraintGroup.append(tabMenuItemsArray[tabMenuItemsArray.count - 1].trailingAnchor
                 .constraint(equalTo: tabMenuItemsArray[tabMenuItemsArray.count - 1].superview!.trailingAnchor))
             
@@ -114,7 +107,6 @@ class ZiftTabMenuView: UIView {
                 }
             }
             
-            
             NSLayoutConstraint.activate(constantConstraintGroup)
             
             for index in 0..<tabMenuItemsArray.count {
@@ -125,12 +117,11 @@ class ZiftTabMenuView: UIView {
                         .constraint(equalTo: tabMenuItemsArray[index + 1].widthAnchor))
                 }
             }
-            
             NSLayoutConstraint.activate(variableConstraintGroup)
         }
     }
     
-    func configureContainerView() {
+    private func configureContainerView() {
         self.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: notSelectedTabTopOffset).isActive = true
