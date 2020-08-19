@@ -30,9 +30,9 @@ class ZiftTabMenuItemView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .ziftSelectedTabTitle
-        label.textAlignment = .left
+        label.font = settings.titleFont
+        label.textColor = settings.titleColor
+        label.textAlignment = settings.titleAligment
         return label
     }()
    
@@ -83,7 +83,7 @@ class ZiftTabMenuItemView: UIView {
         super.init(frame: CGRect.zero)
         configureContainerView()
         configureConstraintGroups()
-        configureTitle(title: settings.title, titleColor: settings.titleColor, aligment: settings.titleAligment)
+       configureTitle(title: settings.title)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -118,10 +118,8 @@ class ZiftTabMenuItemView: UIView {
         ]
     }
     
-    private func configureTitle(title: String, titleColor: UIColor = .ziftSelectedTabTitle, aligment: NSTextAlignment){
+    private func configureTitle(title: String){
         titleLabel.text = title
-        titleLabel.textColor = titleColor
-        titleLabel.textAlignment = aligment
     }
     
     @objc func buttonTapHandler(_ sender: UIButton) {
