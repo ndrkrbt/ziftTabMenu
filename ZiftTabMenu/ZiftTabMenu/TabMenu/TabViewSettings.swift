@@ -15,14 +15,15 @@ struct TabViewSettings {
     var minSelectedWidth: CGFloat
     var minNotselectedWidth: CGFloat
     var tabMenuItemSettings: TabItemViewSettings
-    
+    var tabMenuHeight: CGFloat
     
     init(backgroundColor: UIColor = .white,
          selectedTabWidthCoef: CGFloat = 1.83,
          notSelectedTabTopOffset: CGFloat = 7,
          minSelectedWidth: CGFloat = 140,
          minNotselectedWidth: CGFloat = 50,
-         tabMenuItemSettings: TabItemViewSettings = TabItemViewSettings()) {
+         tabMenuItemSettings: TabItemViewSettings = TabItemViewSettings(),
+         tabMenuHeight: CGFloat = 44) {
         
         self.backgroundColor = backgroundColor
         self.selectedTabWidthCoef = selectedTabWidthCoef
@@ -30,5 +31,6 @@ struct TabViewSettings {
         self.minSelectedWidth = minSelectedWidth
         self.minNotselectedWidth = minNotselectedWidth
         self.tabMenuItemSettings = TabItemViewSettings()
+        self.tabMenuHeight = tabMenuHeight
     }
 }

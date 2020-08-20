@@ -56,6 +56,7 @@ class TabItemView: UIView {
     var settings: TabItemViewSettings
     var tabIndex: Int = 0
     var layoutSettings: TabItemViewLayoutSettings
+    var tabbedVC: TabbedViewController
     
     var isSelected = false {
         didSet {
@@ -84,12 +85,13 @@ class TabItemView: UIView {
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
-    init(settings: TabItemViewSettings, id: String, title: String, iconImage: UIImage) {
+    init(settings: TabItemViewSettings, vc: TabbedViewController, id: String, title: String, iconImage: UIImage) {
         self.id = id
         self.title = title
         self.iconImage = iconImage
         self.settings = settings
         self.layoutSettings = settings.tabItemLayoutSettings
+        self.tabbedVC = vc
         super.init(frame: CGRect.zero)
         configureContainerView()
         configureConstraintGroups()
@@ -130,14 +132,15 @@ class TabItemView: UIView {
     @objc func buttonTapHandler(_ sender: UIButton) {
         tabItemTapHandler?(tabIndex)
     }
-    
+ 
     private func configureContainerView() {
         self.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
         
         configureStackView()
         configureStackContainers()

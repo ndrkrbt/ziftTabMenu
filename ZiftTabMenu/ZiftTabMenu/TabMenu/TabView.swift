@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabView: UIView {
+class TabView: UIViewController {
     
     var settings: TabViewSettings
     var tabItemsArray: [TabItemView] = []
@@ -23,21 +23,26 @@ class TabView: UIView {
         scroll.showsHorizontalScrollIndicator = false
         return scroll
     }()
+    lazy var childrenContainer = UIView()
+    var childrenControllers: [TabbedViewController] = []
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         notSelectedContainerView.layer.cornerRadius = 12
         notSelectedContainerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
-
+    
+    convenience init() {
+        self.init(settings: TabViewSettings())
+    }
     
     init(settings: TabViewSettings) {
         self.settings = settings
-        super.init(frame: CGRect.zero)
+        super.init(nibName: nil, bundle: nil)
         configureScrollView()
         configureNotselectedContainerView()
         notSelectedContainerView.backgroundColor = settings.backgroundColor
-        translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,22 +59,43 @@ class TabView: UIView {
             for item in 0..<self.tabItemsArray.count {
                 self.tabItemsArray[item].isSelected = item == index
             }
+            self.presentChildVC(vc: self.childrenControllers[index])
             tapHandler()
         }
+        childrenControllers.append(tabItem.tabbedVC)
         tabItem.tabIndex = tabItemsArray.count
         tabItemsArray.append(tabItem)
         configureConstraints()
-        setNeedsLayout()
-        layoutIfNeeded()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     func selectTabItem(index: Int) {
         tabItemsArray[index].tabItemTapHandler?(index)
     }
+
+    
+    func presentChildVC(vc: TabbedViewController) {
+        
+        self.childrenControllers.forEach { (childVC) in
+            childVC.view.removeFromSuperview()
+            childVC.removeFromParent()
+        }
+        
+        self.addChild(vc)
+        self.childrenContainer.addSubview(vc.view)
+        
+        vc.view.translatesAutoresizingMaskIntoConstraints = false
+        vc.view.leadingAnchor.constraint(equalTo: childrenContainer.leadingAnchor).isActive = true
+        vc.view.trailingAnchor.constraint(equalTo: childrenContainer.trailingAnchor).isActive = true
+        vc.view.topAnchor.constraint(equalTo: childrenContainer.topAnchor).isActive = true
+        vc.view.bottomAnchor.constraint(equalTo: childrenContainer.bottomAnchor).isActive = true
+    }
+    
     
     private func recalcTabConstraints(selectedIndex: Int){
-        var selectedTabWidth: CGFloat = tabItemsArray.count == 1 ? self.frame.width : (frame.width) / CGFloat(tabItemsArray.count) * settings.selectedTabWidthCoef
-        var notselectedTabWidth = tabItemsArray.count == 1 ? self.frame.width : (frame.width - selectedTabWidth)/CGFloat(tabItemsArray.count - 1)
+        var selectedTabWidth: CGFloat = tabItemsArray.count == 1 ? self.view.frame.width : (view.frame.width) / CGFloat(tabItemsArray.count) * settings.selectedTabWidthCoef
+        var notselectedTabWidth = tabItemsArray.count == 1 ? self.view.frame.width : (view.frame.width - selectedTabWidth)/CGFloat(tabItemsArray.count - 1)
         
         
         selectedTabWidth = selectedTabWidth < settings.minSelectedWidth ? settings.minSelectedWidth : selectedTabWidth
@@ -144,7 +170,7 @@ class TabView: UIView {
         scrollContainerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         scrollContainerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         scrollContainerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        scrollContainerView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        scrollContainerView.heightAnchor.constraint(equalToConstant: settings.tabMenuHeight).isActive = true
         let widthConstraint = scrollContainerView.widthAnchor.constraint(equalToConstant: 1000)
         widthConstraint.priority = UILayoutPriority(rawValue: 100)
         widthConstraint.isActive = true
@@ -152,12 +178,24 @@ class TabView: UIView {
     
     
     private func configureScrollView() {
-        self.addSubview(scrollView)
+        self.view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: settings.tabMenuHeight).isActive = true
         configureScrollContainer()
+        configureChildContainer()
+    }
+    
+    
+    private func configureChildContainer() {
+        self.view.addSubview(childrenContainer)
+        childrenContainer.backgroundColor = .blue
+        childrenContainer.translatesAutoresizingMaskIntoConstraints = false
+        childrenContainer.topAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        childrenContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        childrenContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        childrenContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
 }

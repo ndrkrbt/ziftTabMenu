@@ -28,15 +28,15 @@ class ViewController: UIViewController {
     var childModules: [String: UIViewController] = [:]
     
     func configureTabMenuConstraints() {
-        view.addSubview(tabView)
+        view.addSubview(tabView.view)
+        self.addChild(tabView)
+        tabView.view.translatesAutoresizingMaskIntoConstraints = false
+        tabView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tabView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tabView.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        tabView.view.heightAnchor.constraint(equalToConstant: 444).isActive = true
         
-        tabView.translatesAutoresizingMaskIntoConstraints = false
-        tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tabView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        tabView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-        configureTabContainerView()
+        //configureTabContainerView()
     }
     
     func configureTabContainerView() {
@@ -45,29 +45,41 @@ class ViewController: UIViewController {
         tabContainerView.translatesAutoresizingMaskIntoConstraints = false
         tabContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tabContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tabContainerView.topAnchor.constraint(equalTo: tabView.bottomAnchor).isActive = true
+        tabContainerView.topAnchor.constraint(equalTo: tabView.view.bottomAnchor).isActive = true
         tabContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func configureTabMenuItems() {
         
-        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, id: "Searches", title: "Searches", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
+        let vc1 = TempViewController()
+        vc1.view.backgroundColor = .orange
+        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, vc: vc1, id: "Searches", title: "Searches", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabSelectedHandler()
         })
         
-        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, id: "Screentime", title: "Screentime", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
+        
+        let vc2 = TempViewController()
+        vc2.view.backgroundColor = .yellow
+        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, vc: vc2, id: "Screentime", title: "Screentime", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
+                self?.tabSelectedHandler()
+        })
+
+        
+        let vc3 = TempViewController()
+        vc3.view.backgroundColor = .blue
+        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, vc: vc3, id: "Blocks", title: "Blocks & Alerts", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabSelectedHandler()
         })
         
-        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings,id: "Blocks", title: "Blocks & Alerts", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
+        let vc4 = TempViewController()
+        vc4.view.backgroundColor = .black
+        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings, vc: vc4, id: "YouTube", title: "YouTube", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabSelectedHandler()
         })
-        
-        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings,id: "YouTube", title: "YouTube", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
-            self?.tabSelectedHandler()
-        })
-        
-        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings,id: "Location", title: "Location", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
+
+        let vc5 = TempViewController()
+        vc5.view.backgroundColor = .cyan
+        tabView.addTabItem(tabItem: TabItemView(settings: tabView.settings.tabMenuItemSettings,  vc: vc5, id: "Location", title: "Location", iconImage: UIImage(named: "SearchesTabIcon")!), tapHandler:  { [weak self] in
             self?.tabSelectedHandler()
         })
     }
@@ -104,9 +116,6 @@ class ViewController: UIViewController {
                 childVC.view.removeFromSuperview()
                 childVC.removeFromParent()
             }
-        }
-        guard let vc = vc as? UIViewController else {
-            return
         }
         self.addChild(vc)
         self.tabContainerView.addSubview(vc.view)
