@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol TabbedViewController where Self: UIViewController {
+    
+}
+
+
 class TabView: UIViewController {
     
     var settings: TabViewSettings
@@ -39,7 +44,7 @@ class TabView: UIViewController {
     init(settings: TabViewSettings) {
         self.settings = settings
         super.init(nibName: nil, bundle: nil)
-        configureScrollView()
+        configureViews()
         configureNotselectedContainerView()
         notSelectedContainerView.backgroundColor = settings.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -176,6 +181,11 @@ class TabView: UIViewController {
         widthConstraint.isActive = true
     }
     
+    private func configureViews() {
+        configureScrollView()
+        configureScrollContainer()
+        configureChildrenContainer()
+    }
     
     private func configureScrollView() {
         self.view.addSubview(scrollView)
@@ -184,14 +194,11 @@ class TabView: UIViewController {
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         scrollView.heightAnchor.constraint(equalToConstant: settings.tabMenuHeight).isActive = true
-        configureScrollContainer()
-        configureChildContainer()
     }
     
     
-    private func configureChildContainer() {
+    private func configureChildrenContainer() {
         self.view.addSubview(childrenContainer)
-        childrenContainer.backgroundColor = .blue
         childrenContainer.translatesAutoresizingMaskIntoConstraints = false
         childrenContainer.topAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         childrenContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true

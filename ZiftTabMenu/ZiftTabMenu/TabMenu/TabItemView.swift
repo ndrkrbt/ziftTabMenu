@@ -9,7 +9,7 @@
 import UIKit
 
 class TabItemView: UIView {
-
+    
     lazy var containerView = UIView()
     
     lazy var stackView: UIStackView = {
@@ -36,9 +36,9 @@ class TabItemView: UIView {
         label.text = title
         return label
     }()
-   
+    
     lazy var titleContainerView = UIView()
-   
+    
     lazy var button: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
@@ -93,7 +93,7 @@ class TabItemView: UIView {
         self.layoutSettings = settings.tabItemLayoutSettings
         self.tabbedVC = vc
         super.init(frame: CGRect.zero)
-        configureContainerView()
+        configureViews()
         configureConstraintGroups()
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -132,7 +132,13 @@ class TabItemView: UIView {
     @objc func buttonTapHandler(_ sender: UIButton) {
         tabItemTapHandler?(tabIndex)
     }
- 
+    
+    private func configureViews() {
+        configureContainerView()
+        configureStackView()
+        configureStackContainers()
+        configureButton()
+    }
     private func configureContainerView() {
         self.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,9 +148,7 @@ class TabItemView: UIView {
         containerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         
-        configureStackView()
-        configureStackContainers()
-        configureButton()
+        
     }
     
     private func configureStackView() {

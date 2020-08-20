@@ -34,9 +34,7 @@ class ViewController: UIViewController {
         tabView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tabView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tabView.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        tabView.view.heightAnchor.constraint(equalToConstant: 444).isActive = true
-        
-        //configureTabContainerView()
+        tabView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func configureTabContainerView() {
@@ -89,111 +87,9 @@ class ViewController: UIViewController {
             return
         }
         print(selectedMenuItem.id)
-        switch selectedMenuItem.id {
-        case "Location":
-            showLocationHistoryModule()
-            
-        case "Screentime":
-            showScreenTimeModule()
-            
-        case "Searches":
-            showSearchesModule()
-            
-        case "Blocks":
-            showBlocksModule()
-            
-        case "YouTube":
-            showYoutubeHistoryModule()
-        default:()
-        }
     }
-    
-    
-    
-    func presentChildVC(_ vc: TabbedViewController) {
-        self.children.forEach { (childVC) in
-            if childVC is TabbedViewController {
-                childVC.view.removeFromSuperview()
-                childVC.removeFromParent()
-            }
-        }
-        self.addChild(vc)
-        self.tabContainerView.addSubview(vc.view)
-        
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
-        vc.view.leadingAnchor.constraint(equalTo: tabContainerView.leadingAnchor).isActive = true
-        vc.view.trailingAnchor.constraint(equalTo: tabContainerView.trailingAnchor).isActive = true
-        vc.view.topAnchor.constraint(equalTo: tabContainerView.topAnchor).isActive = true
-        vc.view.bottomAnchor.constraint(equalTo: tabContainerView.bottomAnchor).isActive = true
-    }
-    
-    
-    func showYoutubeHistoryModule() {
-        if let vc = childModules["YouTube"],
-            let cvcYoutube = vc as? TabbedViewController {
-            presentChildVC(cvcYoutube)
-        } else {
-            let youtubeHistoryViewController = TempViewController()
-            youtubeHistoryViewController.view.backgroundColor = .yellow
-            
-            presentChildVC(youtubeHistoryViewController)
-            childModules["YouTube"] = youtubeHistoryViewController
-        }
-    }
-    
-    func showScreenTimeModule() {
-        
-        if let vc = childModules["Screentime"],
-            let stApps = vc as? TabbedViewController {
-            presentChildVC(stApps)
-        } else {
-            let screenTimeViewController = TempViewController()
-            screenTimeViewController.view.backgroundColor = .green
-            presentChildVC(screenTimeViewController)
-            childModules["Screentime"] = screenTimeViewController
-        }
-    }
-    
-    func showSearchesModule() {
-        if let vc = childModules["Searches"],
-            let cvcSearches = vc as? TabbedViewController {
-            presentChildVC(cvcSearches)
-        } else {
-            let searchesViewController = TempViewController()
-            searchesViewController.view.backgroundColor = .orange
-            presentChildVC(searchesViewController)
-            childModules["Searches"] = searchesViewController
-        }
-    }
-    
-    func showBlocksModule() {
-        if let vc = childModules["Blocks"],
-            let cvcBlocks = vc as? TabbedViewController {
-            presentChildVC(cvcBlocks)
-        } else {
-            let blocksViewController = TempViewController()
-            presentChildVC(blocksViewController)
-            childModules["Blocks"] = blocksViewController
-        }
-    }
-    
-    func showLocationHistoryModule() {
-        
-        if let vc = childModules["Location"],
-            let cvcLocation = vc as? TabbedViewController {
-            presentChildVC(cvcLocation)
-        } else {
-            let locationHistoryViewController = TempViewController()
-            presentChildVC(locationHistoryViewController)
-            childModules["Location"] = locationHistoryViewController
-        }
-    }
-    
 }
 
-protocol TabbedViewController where Self: UIViewController {
-    
-}
 
 class TempViewController: UIViewController, TabbedViewController {
     
