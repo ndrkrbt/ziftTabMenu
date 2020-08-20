@@ -16,6 +16,7 @@ struct TabViewSettings {
     var minNotselectedWidth: CGFloat
     var tabMenuItemSettings: TabItemViewSettings
     
+    
     init(backgroundColor: UIColor = .white,
          selectedTabWidthCoef: CGFloat = 1.83,
          notSelectedTabTopOffset: CGFloat = 7,
